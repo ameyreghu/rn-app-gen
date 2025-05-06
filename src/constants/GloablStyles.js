@@ -15,7 +15,8 @@ export const globalStyles = StyleSheet.create({
 export const defaultStyles = StyleSheet.create({
     screen: {
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
+        backgroundColor: '#fff',
     },
     inputContainer: {
         marginBottom: 12,
@@ -23,9 +24,10 @@ export const defaultStyles = StyleSheet.create({
     },
     textInput: {
         fontSize: 16,
-        paddingVertical: 8,
+        paddingVertical: 2,
         padding: 12,
         marginBottom: 12,
+        backgroundColor:"#fff"
     },
     button: {
         marginVertical: 10,

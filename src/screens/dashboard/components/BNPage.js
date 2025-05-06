@@ -1,12 +1,15 @@
-import React, { useState, useCallback, useEffect, Button } from "react";
-import { Text, TextInput, View, KeyboardAvoidingView, FlatList, Platform, Alert, ScrollView } from "react-native";
-import { defaultStyles, globalStyles } from "../../constants/GloablStyles";
-import AppBar from "../../components/AppBar";
-import DevLabel from "../../components/DevLabel";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { CenteredLoadingIndicator } from "../../components/CommonComponents";
-import { get } from "../../data/BaseClient";
-import { BasicListTile } from "../../components/BasicListTile";
+import React, { useState, useCallback, useEffect } from "react";
+import { Text, View, KeyboardAvoidingView, FlatList, Platform, Alert, ScrollView } from "react-native";
+import { defaultStyles, globalStyles } from "../../../constants/GloablStyles";
+import DevLabel from "../../../components/DevLabel";
+import { useNavigation } from "@react-navigation/native";
+import { CenteredLoadingIndicator } from "../../../components/CommonComponents";
+import { get } from "../../../data/BaseClient";
+import { BasicListTile } from "../../../components/BasicListTile";
+import { CardGroup } from "../../../components/DashBoardCard";
+import { Carousel } from "../../../components/Carousel";
+import { Button } from "react-native-paper";
+
 
 const ComponentRenderer = React.memo(({ componentData, state, setState, actionHandler }) => {
     if (!componentData) return null;
@@ -14,10 +17,17 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
     switch (componentData.type) {
         case 'text':
             return <Text style={componentData.style}>{componentData.text}</Text>;
+        case 'cardGroup':
+            console.log('CardGroup', componentData?.cardData);
+            return <CardGroup cardData={componentData?.cardData} />;
+        case 'carousel':
+            return <Carousel data={componentData?.data} />
         case 'button':
-            return <Button title={componentData.text}
+            return <Button mode="contained"
                 style={defaultStyles.button}
-                onPress={() => actionHandler({ action: componentData.action })} />;
+                onPress={() => {
+                    actionHandler({ action: componentData.action });
+                }}><Text>{componentData.text}</Text> </Button>;
         case 'list':
             return (state?.data?.map((item, index) => {
                 return (
@@ -29,26 +39,30 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
                     />
                 );
             })
-
             );
         default:
             return <View />;
     }
 });
 
-export const BasicListingScreen = ({ screenData }) => {
-    const [state, setState] = useState({ ...screenData.initialState, loading: false });
+//Page for Bottom Navigation
+export const BNPage = ({ pageData }) => {
+    console.log('BNPage', pageData);
+    const [state, setState] = useState({ ...pageData.initialState, loading: false });
 
     useEffect(() => {
         loadData();
-    }, []);
+    }, [pageData]);
 
     const loadData = async () => {
-        if (state?.loading || !screenData?.initAction) return;
+        console.log('Load Data -s',pageData?.initAction);
+        if (state?.loading || !pageData?.initAction) return;
+        console.log('Load Data -ss');
 
         setState((prevState) => ({ ...prevState, loading: true }));
         try {
-            const result = await get({ url: screenData.initAction.apiUrl });
+            const result = await get({ url: pageData.initAction.apiUrl });
+          //  console.log('Result', result);
             if (result.success) {
                 setState((prevState) => ({ ...prevState, loading: false, data: result.data }));
             } else {
@@ -99,9 +113,9 @@ export const BasicListingScreen = ({ screenData }) => {
         state?.loading ? (
             <CenteredLoadingIndicator />
         ) : (
-            <View style={globalStyles.container}>
+            <View style={[globalStyles.container,defaultStyles.screen]}>
                 <ScrollView style={globalStyles.container}>
-                    {screenData?.components?.map((component, index) => {
+                    {pageData?.components?.map((component, index) => {
                         return (<ComponentRenderer
                             key={index}
                             componentData={component}
@@ -114,6 +128,7 @@ export const BasicListingScreen = ({ screenData }) => {
                 </ScrollView>
                 <DevLabel text={'Basic Listing'} />
             </View >
+
 
         )
     );

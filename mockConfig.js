@@ -5,6 +5,7 @@ export const mockConfig = {
     initialRoute: 'home',
     routes: [
         'home',
+        'home2',
         'listing1',
         'listing2',
         'form1',
@@ -12,8 +13,181 @@ export const mockConfig = {
     ],
     screens: [
         {
-            type: 'base',
+            type: 'dashboard',
             route: 'home',
+            title: 'Home',
+            bottomNavigaton: [
+                {
+                    label: 'Home',
+                    icon: 'home',
+                },
+                {
+                    label: 'Reports',
+                    icon: 'assessment'
+                },
+                {
+                    label: 'Showcase',
+                    icon: 'show-chart',
+
+                }
+            ],
+            pages: [
+                {
+                    type: 'base',
+                    components: [
+                        {
+                            type: 'carousel',
+                            data: [
+                                { text: 'Sensex Down by 2%', image: 'https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                                { text: 'Breakthough in Genai', image: 'https://images.unsplash.com/photo-1538131587570-641359811581?q=80&w=2155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                            ]
+                        },
+                        {
+                            type: 'text',
+                            text: 'Welcome to JDF POC1',
+                            style: {
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                                marginBottom: 10,
+                                alignSelf: 'flex-start',
+                                padding: 10
+                            }
+                        },
+                        {
+                            type: 'cardGroup',
+                            cardData: [
+                                {
+                                    text: 'Total Users',
+                                    icon: 'people',
+                                    stats: '1,245',
+                                },
+                                {
+                                    text: 'Active Sessions',
+                                    icon: 'trending-up',
+                                    stats: '342',
+                                },
+                                {
+                                    text: 'New Signups',
+                                    icon: 'person-add',
+                                    stats: '58',
+                                },
+                                {
+                                    text: 'Revenue',
+                                    icon: 'attach-money',
+                                    stats: '$12,340',
+                                },
+                            ]
+                        }
+                    ]
+
+                },
+                {
+                    type: 'listing',
+                    title: 'Listing 1',
+                    initialState: {
+                        data: []
+                    },
+                    initAction: {
+                        apiUrl: 'https://jsonplaceholder.typicode.com/posts',
+                        method: 'GET'
+                    },
+                    components: [
+                        {
+                            type: 'text',
+                            text: 'Recent News',
+                            style: {
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                                marginBottom: 10,
+                                alignSelf: 'flex-start',
+                                padding: 10
+                            }
+                        },
+                        {
+                            type: 'list',
+                            dataKey: 'data',
+                            itemComponent: {
+                                type: 'tile',
+                                titleKey: 'title',
+                                idKey: 'id',
+                                bodyKey: 'body',
+                                style: {
+                                    fontSize: 16,
+                                    fontWeight: 'bold',
+                                    marginBottom: 10,
+                                    alignSelf: 'center',
+                                    padding: 10
+                                }
+                            },
+                        }
+                    ]
+                },
+                {
+                    type: 'base',
+                    components: [
+                        {
+                            type: 'text',
+                            text: 'Welcome to JDF POC1',
+                            style: {
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                                marginBottom: 10,
+                                alignSelf: 'center',
+                                padding: 10
+                            }
+                        },
+                        {
+                            type: 'button',
+                            text: 'Go To Listing 1',
+                            action: {
+                                type: 'navigate',
+                                route: 'listing1'
+                            }
+                        },
+                        {
+                            type: 'button',
+                            text: 'Go To Listing 2',
+                            action: {
+                                type: 'navigate',
+                                route: 'listing2'
+                            }
+                        },
+                        {
+                            type: 'button',
+                            text: 'Loan Opeing Form',
+                            action: {
+                                type: 'navigate',
+                                route: 'form1'
+                            }
+                        },
+                        {
+                            type: 'button',
+                            text: 'Deposit Opeing Form',
+                            action: {
+                                type: 'navigate',
+                                route: 'form2'
+                            }
+                        }
+                    ]
+                }
+            ],
+            components: [
+                {
+                    type: 'text',
+                    text: 'Welcome to JDF POC1',
+                    style: {
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        marginBottom: 10,
+                        alignSelf: 'center',
+                        padding: 10
+                    }
+                },
+            ]
+        },
+        {
+            type: 'base',
+            route: 'home2',
             title: 'Home',
             components: [
                 {

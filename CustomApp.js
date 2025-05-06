@@ -2,12 +2,11 @@ import { Text, View } from "react-native";
 import { DynamicScreen } from "./src/DynamicScreen";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import { toTitleCase } from './src/utils/stringUtils'; // Import utility function
 
 //CustomApp is where we render the the App after we have access to appConfig .
 export function CustomApp({ appConfig }) {
     console.log('CustomApp', appConfig);
-
 
     const Stack = createStackNavigator();
 
@@ -21,6 +20,7 @@ export function CustomApp({ appConfig }) {
                             <Stack.Screen
                                 key={index}
                                 name={route}
+                                options={{ title: toTitleCase(route) }} // Set title case for header
                                 children={(props) => <DynamicScreen {...props} screenData={screenData} />}
                             />
                         );

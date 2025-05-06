@@ -1,12 +1,13 @@
 import React, { useState, useCallback } from "react";
-import { Text, TextInput, View, KeyboardAvoidingView, ScrollView, Platform, Alert,Button } from "react-native";
+import { Text, View, KeyboardAvoidingView, ScrollView, Platform, Alert } from "react-native";
 import { defaultStyles, globalStyles } from "../../constants/GloablStyles";
 import AppBar from "../../components/AppBar";
 import DevLabel from "../../components/DevLabel";
 import { useNavigation } from "@react-navigation/native";
 import { CenteredLoadingIndicator } from "../../components/CommonComponents";
 //import {Input ,Button,CheckBox } from "@rncui/themed";
-import { Checkbox } from 'react-native-paper';
+import {TextInput,Button} from 'react-native-paper';
+import { LabeledCheckBox } from "../../components/LabeledCheckBox";
 
 
 const ComponentRenderer = React.memo(({ componentData, state, setState, actionHandler }) => {
@@ -17,17 +18,17 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
         case 'text':
             return <Text style={componentData.style}>{componentData.text}</Text>;
         case 'button':
-            return <Button title={componentData.text} 
-            style={defaultStyles.button}
+            return <Button  mode="contained"
+           // style={defaultStyles.button}
             onPress={() => {
                 actionHandler({ action: componentData.action });
-            }} />;
+            }}><Text>{componentData.text}</Text> </Button>;
         case 'input':
             return <TextInput
                 value={state[componentData.stateKey]}
                 placeholder={componentData.placeholder}
-                containerStyle={defaultStyles.inputContainer}
-                inputStyle={defaultStyles.textInput}
+                mode="outlined"
+                style={defaultStyles.textInput}
                 inputMode={componentData?.inputMode}
                 label={componentData.label}
                 onChangeText={(val) => {
@@ -36,9 +37,9 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
                 }}
             />;
         case 'checkbox':
-            return <Checkbox
-                //title={componentData.label}
-                status={state[componentData.stateKey] ? 'checked' : 'unchecked'}
+            return <LabeledCheckBox
+                label={componentData.label}
+                value={state[componentData.stateKey]}
                 onPress={() => {
                     setState((prevState) => ({ ...prevState, [componentData.stateKey]: !prevState[componentData.stateKey] }));
                 }}
