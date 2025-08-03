@@ -11,6 +11,9 @@ export const mockConfig = {
         'form1',
         'form2'
     ],
+    theme:{
+        primary: '#007BFF',
+    },
     screens: [
         {
             type: 'dashboard',
@@ -29,6 +32,11 @@ export const mockConfig = {
                     label: 'Showcase',
                     icon: 'show-chart',
 
+                },
+                {
+                    label: 'Showcase2',
+                    icon: 'show-chart',
+
                 }
             ],
             pages: [
@@ -38,45 +46,63 @@ export const mockConfig = {
                         {
                             type: 'carousel',
                             data: [
-                                { text: 'Sensex Down by 2%', image: 'https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+                                { text: 'Sensex Down by 2%', image: 'https://images.unsplash.com/photo-1497015289639-54688650d173?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
                                 { text: 'Breakthough in Genai', image: 'https://images.unsplash.com/photo-1538131587570-641359811581?q=80&w=2155&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
                             ]
                         },
                         {
                             type: 'text',
-                            text: 'Welcome to JDF POC1',
+                            text: 'Welcome to JDF',
                             style: {
                                 fontSize: 20,
                                 fontWeight: 'bold',
                                 marginBottom: 10,
+                                marginTop:20,
                                 alignSelf: 'flex-start',
                                 padding: 10
                             }
                         },
                         {
                             type: 'cardGroup',
-                            cardData: [
+                            cardData: {
+                                style:{
+                                    //color:'#fff'
+                                },
+                                containerStyle:{
+                                    // backgroundColor:'grey'
+                                },
+                                data:[
                                 {
-                                    text: 'Total Users',
-                                    icon: 'people',
-                                    stats: '1,245',
+                                    text: 'Total Portfolio Value',
+                                    icon: 'account-balance-wallet',
+                                    stats: '$2,500,000'
                                 },
                                 {
-                                    text: 'Active Sessions',
+                                    text: 'Daily Gains',
                                     icon: 'trending-up',
-                                    stats: '342',
+                                    stats: '$5,000',
                                 },
                                 {
-                                    text: 'New Signups',
-                                    icon: 'person-add',
-                                    stats: '58',
+                                    text: 'Active Investors',
+                                    icon: 'group',
+                                    stats: '1,200',
                                 },
                                 {
-                                    text: 'Revenue',
+                                    text: 'Monthly Revenue',
                                     icon: 'attach-money',
-                                    stats: '$12,340',
+                                    stats: '$50,000',
                                 },
-                            ]
+                                {
+                                    text: 'Pending Withdrawals',
+                                    icon: 'hourglass-empty',
+                                    stats: '$15,000',
+                                },
+                                {
+                                    text: 'New Investments',
+                                    icon: 'show-chart',
+                                    stats: '$100,000',
+                                }
+                            ]}
                         }
                     ]
 
@@ -130,6 +156,31 @@ export const mockConfig = {
                             text: 'Welcome to JDF POC1',
                             style: {
                                 fontSize: 20,
+                                fontWeight: 'bold',
+                                marginBottom: 10,
+                                alignSelf: 'center',
+                                padding: 10
+                            }
+                        },
+                        {
+                            type: 'button',
+                            text: 'Click Me',
+                            action: {
+                                type: 'navigate',
+                                route: 'listing1'
+                            }
+                        },
+                      
+                    ]
+                },
+                {
+                    type: 'base',
+                    components: [
+                        {
+                            type: 'text',
+                            text: 'Welcome to JDF POC1',
+                            style: {
+                                fontSize: 12,
                                 fontWeight: 'bold',
                                 marginBottom: 10,
                                 alignSelf: 'center',
@@ -256,6 +307,7 @@ export const mockConfig = {
                 nic: '',
                 phone: '',
                 amount: '',
+                age:"",
                 terms: false
             },
             components: [
@@ -297,6 +349,13 @@ export const mockConfig = {
                     label: 'Phone',
                     placeholder: 'Enter your phone',
                     stateKey: 'phone'
+                },
+                {
+                    type: 'input',
+                    inputMode: 'numeric',
+                    label: 'Age',
+                    placeholder: 'Enter your Age',
+                    stateKey: 'age'
                 },
                 {
                     type: 'input',

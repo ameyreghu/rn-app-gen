@@ -40,6 +40,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderTopWidth: 1,
         borderTopColor: '#ccc',
+        // Add shadow for iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.6,
+        shadowRadius: 4,
+        // Add elevation for Android
+        elevation: 4,
     },
     tab: {
         alignItems: 'center',

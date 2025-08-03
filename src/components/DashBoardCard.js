@@ -4,28 +4,28 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const screenWidth = Dimensions.get('window').width;
 const cardWidth = Math.min((screenWidth - 89) / 2, 200); // Ensures cards are responsive but do not exceed a max width
 
-export const CardGroup = ({ cardData = [] }) => {
+export const CardGroup = ({ cardData = [],style,containerStyle }) => {
     return (
         <View style={styles.cardGroupContainer}>
             {cardData.map((card, index) => (
-                <DashboardCard key={index} text={card.text} icon={card.icon} stats={card?.stats} />
+                <DashboardCard key={index} text={card.text} icon={card.icon} stats={card?.stats} style={style} containerStyle={containerStyle} />
             ))}
         </View>
     );
 };
 
-export const DashboardCard = ({ text, icon, stats }) => {
+export const DashboardCard = ({ text, icon, stats,style,containerStyle }) => {
     return (
-        <View style={styles.cardContainer}>
+        <View style={[styles.cardContainer,containerStyle]}>
             {icon && <Icon name={icon} size={24} color={'#007BFF'} style={styles.iconStyle} />}
-            <View style={{
+            <View style={[{
                 flexDirection:'row',
                 justifyContent: 'space-between',
                 flex: 1,
                 marginLeft: 30,
-            }}>
-                <Text style={styles.cardText}>{text}</Text>
-                <Text style={styles.statsText}>{stats}</Text>
+            }]}>
+                <Text style={[styles.cardText,style]}>{text}</Text>
+                <Text style={[styles.statsText,style]}>{stats}</Text>
             </View>
 
         </View>

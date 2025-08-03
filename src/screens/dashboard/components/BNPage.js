@@ -19,22 +19,24 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
             return <Text style={componentData.style}>{componentData.text}</Text>;
         case 'cardGroup':
             console.log('CardGroup', componentData?.cardData);
-            return <CardGroup cardData={componentData?.cardData} />;
+            return <CardGroup cardData={componentData?.cardData?.data} style={componentData?.cardData?.style} containerStyle={componentData?.cardData?.containerStyle} />;
         case 'carousel':
             return <Carousel data={componentData?.data} />
         case 'button':
-            return <Button mode="contained"
+            return <Button mode={Platform.OS === 'ios' ? 'text' : 'contained'}
                 style={defaultStyles.button}
                 onPress={() => {
                     actionHandler({ action: componentData.action });
                 }}><Text>{componentData.text}</Text> </Button>;
         case 'list':
+            console.log('List', componentData);
             return (state?.data?.map((item, index) => {
+                console.log('List Item', item);
                 return (
                     <BasicListTile
                         key={index}
-                        title={item?.title}
-                        subtitle={item?.subtitle}
+                        title={item?.[componentData?.itemComponent?.titleKey]}
+                        description={item?.[componentData?.itemComponent?.bodyKey]}
                         onPress={() => actionHandler({ action: componentData.action })}
                     />
                 );
@@ -114,7 +116,11 @@ export const BNPage = ({ pageData }) => {
             <CenteredLoadingIndicator />
         ) : (
             <View style={[globalStyles.container,defaultStyles.screen]}>
-                <ScrollView style={globalStyles.container}>
+                <ScrollView 
+                style={globalStyles.container}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                >
                     {pageData?.components?.map((component, index) => {
                         return (<ComponentRenderer
                             key={index}
@@ -126,7 +132,7 @@ export const BNPage = ({ pageData }) => {
                     })
                     }
                 </ScrollView>
-                <DevLabel text={'Basic Listing'} />
+                <DevLabel text={'BNPage'} />
             </View >
 
 

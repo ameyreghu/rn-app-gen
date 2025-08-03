@@ -18,11 +18,16 @@ const ComponentRenderer = React.memo(({ componentData, state, setState, actionHa
         case 'text':
             return <Text style={componentData.style}>{componentData.text}</Text>;
         case 'button':
-            return <Button  mode="contained"
-           // style={defaultStyles.button}
-            onPress={() => {
-                actionHandler({ action: componentData.action });
-            }}><Text>{componentData.text}</Text> </Button>;
+            return (
+                <Button
+                    mode={Platform.OS === 'ios' ? 'text' : 'contained'}
+                    onPress={() => {
+                        actionHandler({ action: componentData.action });
+                    }}
+                >
+                    <Text>{componentData.text}</Text>
+                </Button>
+            );
         case 'input':
             return <TextInput
                 value={state[componentData.stateKey]}
@@ -83,7 +88,7 @@ export const BasicFormScreen = ({ screenData }) => {
     function handleFormSubmissionStatus() {
         Alert.alert(
             'Form Submission',
-            'Form submitted successfully!',
+            `Form submitted successfully!\n\nYour Data:\n${JSON.stringify(state, null, 2)}`,
             [
                 {
                     text: 'OK',
