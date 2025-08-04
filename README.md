@@ -9,7 +9,7 @@ A lightweight Server-Driven UI (SDUI) engine built with **React Native** that dy
 
 | Dashboard | Listing | Form |
 |-----------|---------|------|
-| ![Dashboard](screenshots/dashboard.png) | ![Listing](screenshots/listing.png) | ![Form](screenshots/form.png) |
+| ![Dashboard](screenshots/dashboard.jpg) | ![Listing](screenshots/listing.jpg) | ![Form](screenshots/form.jpg) |
 
 ---
 
