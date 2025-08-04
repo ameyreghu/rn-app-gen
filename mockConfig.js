@@ -300,7 +300,7 @@ export const mockConfig = {
         {
             type: 'form',
             route: 'form1',
-            title: 'Open Loan',
+            title: 'Test Form',
             initialState: {
                 name: '',
                 email: '',
@@ -313,7 +313,7 @@ export const mockConfig = {
             components: [
                 {
                     type: 'text',
-                    text: 'Open Loan',
+                    text: 'Test Form',
                     style: {
                         fontSize: 20,
                         fontWeight: 'bold',
@@ -339,8 +339,8 @@ export const mockConfig = {
                 {
                     type: 'input',
                     inputMode: 'text',
-                    label: 'NIC',
-                    placeholder: 'Enter your nic',
+                    label: 'ID',
+                    placeholder: 'Enter your id',
                     stateKey: 'nic'
                 },
                 {
